@@ -1,14 +1,14 @@
-boot.elf: boot.S boot.ld
-	i686-elf-gcc boot.S -T boot.ld -ffreestanding -nostdlib -o boot.elf
+first_stage_boot.elf: first_stage_boot.S first_stage_boot.ld
+	i686-elf-gcc first_stage_boot.S -T first_stage_boot.ld -ffreestanding -nostdlib -o first_stage_boot.elf
 
-dummy_kernel.elf: dummy_kernel.S dummy_kernel.ld
-	i686-elf-gcc dummy_kernel.S -T dummy_kernel.ld -ffreestanding -nostdlib -o dummy_kernel.elf	
+second_stage_boot.elf: second_stage_boot.S second_stage_boot.ld
+	i686-elf-gcc second_stage_boot.S -T second_stage_boot.ld -ffreestanding -nostdlib -o second_stage_boot.elf	
 
-disk.bin: boot.elf dummy_kernel.elf
-	i686-elf-objcopy boot.elf -O binary disk.bin
-	i686-elf-objcopy dummy_kernel.elf -O binary temp_dummy_kernel.bin
-	dd if=temp_dummy_kernel.bin of=disk.bin bs=1 seek=512
-	rm temp_dummy_kernel.bin
+disk.bin: first_stage_boot.elf second_stage_boot.elf
+	i686-elf-objcopy first_stage_boot.elf -O binary disk.bin
+	i686-elf-objcopy second_stage_boot.elf -O binary temp_second_stage_boot.bin
+	dd if=temp_second_stage_boot.bin of=disk.bin bs=1 seek=512
+# 	rm temp_second_stage_boot.bin
 
 run: disk.bin
 	qemu-system-i386 -fda disk.bin
