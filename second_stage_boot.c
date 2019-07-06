@@ -3,11 +3,6 @@ asm(".code16gcc");
 
 #define SECTOR_SIZE 512
 
-#define KERNEL_LBA (8226584)
-
-#define INITRD_LBA     (10798960)
-#define INITRD_SECTORS (77432)
-
 char getchar(void) {
     int ax = 0;
     __asm__ __volatile__("int $0x16" : "+a"(ax) ::); // INT 0x16(0) AH=0 returns character in ax
@@ -444,8 +439,7 @@ void __attribute__((section(".main"))) __attribute__((regparm(3))) second_stage_
 
     BOOT_ASSERT(high_memory_copy(KERNEL_SETUP, &boot_protocol, sizeof(linux_boot_protocol_data_t)));
 
-    // static const char cmd[] = "root=/dev/sda1";
-    static const char cmd[] = "BOOT_IMAGE=/boot/vmlinuz-4.18.0-10-generic root=UUID=833b71c1-0e57-4e15-9bcf-1d718a2bdad8 ro find_preseed=/preseed.cfg auto noprompt priority=critical locale=en_US";
+    static const char cmd[] = KERNEL_CMD;
     BOOT_ASSERT(high_memory_copy(KERNEL_COMMAND, cmd, sizeof(cmd)));
 
     uint32_t kernel_pm_bytes   = boot_protocol.syssize * 16;
@@ -469,6 +463,10 @@ void __attribute__((section(".main"))) __attribute__((regparm(3))) second_stage_
 
     puts("\r\nLoading ramdisk...");
     BOOT_ASSERT(copy_disk_to_high_memory(original_boot_drive, KERNEL_RAMDISK, INITRD_LBA, INITRD_SECTORS));
+
+    puts("Running kernel with following boot paramers:\r\n");
+    puts(cmd);
+    puts("\r\n");
 
     // jump to kernel
     __asm__ __volatile__(
