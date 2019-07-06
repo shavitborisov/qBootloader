@@ -1,0 +1,9 @@
+target remote :1234
+set disassembly-flavor intel
+set architecture i8086
+b start
+b final_step
+b after_final
+b read_sectors.sector_next
+b read_sector.read
+b lba_to_chs

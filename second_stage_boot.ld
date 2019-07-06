@@ -22,5 +22,14 @@ SECTIONS {
         *(COMMON);
     }
 
+    /DISCARD/ : {
+        *(.eh_frame);
+        *(.note*);
+        *(.iplt*);
+        *(.igot*);
+        *(.rel*);
+        *(.comment);
+    }
+
     second_stage_end = .;
 }

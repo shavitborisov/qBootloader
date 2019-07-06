@@ -17,7 +17,7 @@ METADATA_SEGMENT = 0x0800
 start:  
     jmp 0:start_boot # enforce 0:0x7c00 instead of (0x7c0:0)
 
-start_boot:   
+start_boot:
     # 1. Reset segments
     cli                     # Clear interrupts
     xor ax, ax
@@ -37,7 +37,7 @@ start_boot:
 
     and cx, 0x3f            # Retrieving disk geometry
     mov cylinder_sectors, cx
-    mov al, cl # TODO: ?
+    mov al, cl              # TODO: ?
     movzx dx, dh
     add dx, 1
     mov num_sides, dx
@@ -57,7 +57,6 @@ start_boot:
     call read_disk_to_memory
 
     # 5. Load entire second stage into specified load address
-step_5:
     mov ax, 1               # LBA number
     mov cx, METADATA_SEGMENT
     mov es, cx
@@ -70,10 +69,14 @@ step_5:
     xor bx, bx              # Buffer offset
     call read_disk_to_memory
 
+    xor ax, ax              # Clear es segment
+    mov es, ax
+
     pop bx                  # Restore load segment value
 
     shl bx, 4               # Multiply by 16
     add bx, 4               # Add code start offset
+    mov ax, original_boot_drive # Pass AX=original_boot_drive as first parameter to second stage main
     jmp bx                  # Jump to second-stage-boot
 
     jmp boot_failure        # Error
