@@ -359,6 +359,8 @@ typedef struct __attribute__((packed)) {
 #define KERNEL_PROTECTED_MODE ((uint8_t*)0x100000)
 #define KERNEL_RAMDISK        ((uint8_t*)0x7fab000)
 
+#define CAN_USE_HEAP_END 0x80
+
 #define BOOT_ASSERT(condition) \
     do { \
         if (!(condition)) { \
@@ -366,8 +368,6 @@ typedef struct __attribute__((packed)) {
             goto boot_error; \
         } \
     } while (0)
-
-#define CAN_USE_HEAP_END 0x80
 
 /**
  * Second stage boot - Loads Linux kernel.
@@ -379,7 +379,15 @@ typedef struct __attribute__((packed)) {
 void __attribute__((section(".main"))) __attribute__((regparm(3))) second_stage_main(uint16_t original_boot_drive) {
     int error_line = 0;
 
-    puts("Welcome to qBootloader! Press any key to continue...\r\n");
+    puts(
+        "         ____              __  __                __           \r\n"
+        "  ____ _/ __ )____  ____  / /_/ /___  ____ _____/ /__  _____  \r\n"
+        " / __ `/ __  / __ \\/ __ \\/ __/ / __ \\/ __ `/ __  / _ \\/ ___/  \r\n"
+        "/ /_/ / /_/ / /_/ / /_/ / /_/ / /_/ / /_/ / /_/ /  __/ /      \r\n"
+        "\\__, /_____/\\____/\\____/\\__/_/\\____/\\__,_/\\__,_/\\___/_/       \r\n"
+        "  /_/                                                         \r\n");
+
+    puts("\r\nWelcome to qBootloader! Press any key to continue...\r\n");
     getchar();
 
     // uint8_t sector[SECTOR_SIZE];
