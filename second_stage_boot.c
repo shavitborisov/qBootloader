@@ -427,7 +427,7 @@ void __attribute__((section(".main"))) __attribute__((regparm(3))) second_stage_
     // print_hex(setup_sects);
     // puts("\r\n");
 
-    puts("\r\nLoading kernel setup...");
+    puts("\r\n[qBootloader] Loading kernel setup...");
     BOOT_ASSERT(copy_disk_to_high_memory(original_boot_drive, KERNEL_SETUP, KERNEL_LBA, setup_sects + 1));
 
     // Initialize boot protocol data by copying it from KERNEL_SETUP, overriding mandatory values
@@ -461,7 +461,7 @@ void __attribute__((section(".main"))) __attribute__((regparm(3))) second_stage_
     // puts("\r\nkernel_pm_lba: ");
     // print_decimal(kernel_pm_lba);
 
-    puts("\r\nLoading protected mode kernel...");
+    puts("\r\n[qBootloader] Loading protected mode kernel...");
     BOOT_ASSERT(copy_disk_to_high_memory(original_boot_drive, KERNEL_PROTECTED_MODE, kernel_pm_lba, kernel_pm_sectors));
 
     // BOOT_ASSERT(high_memory_copy(first_sector, KERNEL_PROTECTED_MODE, SECTOR_SIZE));
@@ -469,10 +469,10 @@ void __attribute__((section(".main"))) __attribute__((regparm(3))) second_stage_
     // BOOT_ASSERT(high_memory_copy(first_sector, KERNEL_PROTECTED_MODE + kernel_pm_bytes - 0x10, 0x10));
     // hexdump(first_sector, 0x10);
 
-    puts("\r\nLoading ramdisk...");
+    puts("\r\n[qBootloader] Loading ramdisk...");
     BOOT_ASSERT(copy_disk_to_high_memory(original_boot_drive, KERNEL_RAMDISK, INITRD_LBA, INITRD_SECTORS));
 
-    puts("Running kernel with following boot paramers:\r\n");
+    puts("\r\n[qBootloader] Running kernel with following boot paramers:\r\n");
     puts(cmd);
     puts("\r\n");
 
