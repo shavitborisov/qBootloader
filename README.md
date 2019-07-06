@@ -1,19 +1,38 @@
 # qBootloader
-qBootloader is a multi-platform bootloader for 32-bit Linux.
+qBootloader is a simple, modular, multi-stage bootloader for Linux. 
 
 ## Requirements
-* x86 32-bit CPU
-* Linux with non fragmented kernel file
-* sudo hdparm --fibmap /boot/<kernel> should show one continues block of sectors with bytes_offset 0
+* Linux on 32/64-bit x86 CPU. Supports both 32/64 bit Linux kernels.
+* i686-elf-gcc cross compiler toolchain.
+
+## Prerequisites
+qBootloader only supports booting from non-fragmented kernel and and initrd files.
+To make sure these are non fragmented (on ext4 FS), run the following:
+
+`
+sudo e4defrag /boot/<vmlinuz-kernel>
+sudo e4defrag /boot/<initrd-image>
+`
+
+A non fragmented kernel file should have a similar output with hdparm.
+
+`$ sudo hdparm --fibmap /boot/vmlinuz-4.18.0-10-generic 
+/boot/vmlinuz-4.18.0-10-generic:
+ filesystem blocksize 4096, begins at LBA 2048; assuming 512 byte sectors.
+ byte_offset  begin_LBA    end_LBA    sectors
+           0    8226584    8243271      16688
+`
+
+The important thing is to have byte_offset 0 and a single line of sectors.
 
 ## Installation
-_currently unavailable_
+Build and install qBootloader to disk with
+`make install_to_disk KERNEL_DISK_FILE=<kernel-disk-device> KERNEL_FILE=/boot/<vmlinuz-kernel> INITRD_FILE=</boot/<initrd-image>`
 
-## Usage
-_currently unavailable_
-
-## Contributing
-_currently unavailable_
+## Screenshots
+1
+2
+3
 
 ## License
-[Unlicense](https://choosealicense.com/licenses/unlicense/)
+[GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
