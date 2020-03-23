@@ -8,7 +8,7 @@
 * i686-elf-gcc cross compiler toolchain.
 
 ## Prerequisites
-**qBootloader** only supports booting from non-fragmented kernel and and initrd files.
+qBootloader only supports booting from non-fragmented kernel and and initrd files.
 To make sure these are non fragmented (on ext4 FS), run the following:
 
 ```
@@ -29,20 +29,25 @@ $ sudo hdparm --fibmap /boot/vmlinuz-4.18.0-10-generic
 The important thing is to have `byte_offset 0` and a single line of sectors.
 
 ## Installation
-Build and install **qBootloader** to disk with:
+Build and install qBootloader to disk with:
 ```
 make install_to_disk KERNEL_DISK_FILE=<kernel-disk-device> KERNEL_FILE=/boot/<vmlinuz-kernel> INITRD_FILE=</boot/<initrd-image>
 ```
 
 ## Screenshots
-Building **qBootloader**:
+Building qBootloader:
 ![Building qBootloader](/screenshots/1.png "Building qBootloader")
 
-Running **qBootloader**:
+Running qBootloader:
 ![Running qBootloader](/screenshots/2.png "Running qBootloader")
 
+<<<<<<< HEAD
 Ubuntu 18.10 (amd64) booted with **qBootloader**
 !:[Ubuntu 18.10 (amd64) booted with qBootloader](/screenshots/3.JPG "Ubuntu 18.10 (amd64) booted with qBootloader")
+=======
+Ubuntu 18.10 (amd64) booted with qBootloader:
+![Ubuntu 18.10 (amd64) booted with qBootloader](/screenshots/3.JPG "Ubuntu 18.10 (amd64) booted with qBootloader")
+>>>>>>> 0f5677ac33ce7ba2a65f10663da9b98d095a3a99
 
 ## License
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
