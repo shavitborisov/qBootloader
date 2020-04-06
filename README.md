@@ -38,7 +38,7 @@ make install_to_disk KERNEL_DISK_FILE=<kernel-disk-device> KERNEL_FILE=/boot/<vm
 Building qBootloader:
 ![Building qBootloader](/screenshots/1.png "Building qBootloader")
 
-Running qBootloader:
+Running qBootloader:   
 ![Running qBootloader](/screenshots/2.png "Running qBootloader")
 
 Ubuntu 18.10 (amd64) booted with qBootloader:
