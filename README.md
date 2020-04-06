@@ -36,13 +36,13 @@ make install_to_disk KERNEL_DISK_FILE=<kernel-disk-device> KERNEL_FILE=/boot/<vm
 
 ## Screenshots
 Building qBootloader:
-![Building qBootloader](/screenshots/1.png "Building qBootloader")
+![Building qBootloader](https://github.com/shavitborisov/qBootloader/blob/master/screenshots/1.png "Building qBootloader")
 
 Running qBootloader:   
-![Running qBootloader](/screenshots/2.png "Running qBootloader")
+![Running qBootloader](https://github.com/shavitborisov/qBootloader/blob/master/screenshots/2.png "Running qBootloader")
 
 Ubuntu 18.10 (amd64) booted with qBootloader:
-![Ubuntu 18.10 (amd64) booted with qBootloader](/screenshots/3.JPG "Ubuntu 18.10 (amd64) booted with qBootloader")
+![Ubuntu 18.10 (amd64) booted with qBootloader](https://github.com/shavitborisov/qBootloader/blob/master/screenshots/3.JPG "Ubuntu 18.10 (amd64) booted with qBootloader")
 
 ## License
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
