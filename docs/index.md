@@ -1,8 +1,3 @@
-![Logo](qB_logo.png)
-
-# qBootloader
-**qBootloader** is a simple, modular, multi-stage bootloader for Linux. 
-
 ## Requirements
 * Linux on 32/64-bit x86 CPU. Supports both 32/64 bit Linux kernels.
 * i686-elf-gcc cross compiler toolchain.
