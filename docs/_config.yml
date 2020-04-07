@@ -1,2 +1,4 @@
-theme: jekyll-theme-hacker
 title: qBootloader
+description: A simple, working bootloader for Linux.
+theme: jekyll-theme-hacker
+show_downloads: "true"
